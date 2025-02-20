@@ -21,6 +21,7 @@ services:
     image: timsummertonbrier/chores
     env_file: $HOME/chores-secrets.env
     environment:
+      - MICRONAUT_SERVER_CONTEXT_PATH=/chores
       - MICRONAUT_ENVIRONMENTS=raspberrypi
       - APP_LOG_FILE_LOCATION=/local-storage
     volumes:

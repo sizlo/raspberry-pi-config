@@ -22,6 +22,7 @@ Config for all the apps I run on my Pi. This is all intended to be used on a Ras
     - Using https so credentials are not needed, I don't expect to push changes from the Pi
 - Set up environment files for secrets of each app
     - [vaillant-poller](https://github.com/sizlo/vaillant-poller?tab=readme-ov-file#run) - `$HOME/vaillant-poller-secrets.env`
+    - [chores](https://github.com/sizlo/chores?tab=readme-ov-file#required-environment-variables-for-running-on-a-raspberry-pi) - `$HOME/chores-secrets.env`
 - Run the apps: `docker compose up -d`
     - Because `restart: always` is configured in the compose file, the apps will be restarted if they crash, or the Pi is rebooted. The apps can be shutdown with: `docker compose down`
 

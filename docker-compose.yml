@@ -37,6 +37,7 @@ services:
     command:
       - '--config.file=/home/prometheus.yml'
       - '--web.external-url=http://localhost:9090/prometheus/'
+      - '--storage.tsdb.retention.time=10y'
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:

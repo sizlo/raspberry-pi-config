@@ -40,6 +40,7 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./prometheus.yml:/home/prometheus.yml
+      - $HOME/prometheus-storage:/prometheus
 
   prometheus-node-exporter:
     image: prom/node-exporter

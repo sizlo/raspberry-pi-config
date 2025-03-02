@@ -13,5 +13,8 @@ scrape_configs:
     metrics_path: "/metrics"
     static_configs:
       - targets: ["vaillant-poller:9200"]
-        labels:
-          source: "vaillant-poller"
+      # Not specifying a source label here because I'm adding the source label
+      # in the app. See comment in the vaillant-poller source code for an
+      # explanation.
+        # labels:
+        #   source: "vaillant-poller"

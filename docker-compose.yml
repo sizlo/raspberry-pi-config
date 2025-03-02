@@ -15,6 +15,8 @@ services:
       - VAILLANT_LOCAL_STORAGE_PATH=/local-storage
     volumes:
       - $HOME/vaillant-poller-storage:/local-storage
+    ports:
+      - 9200:9200
     restart: always
 
   chores:
@@ -26,13 +28,12 @@ services:
       - APP_LOG_FILE_LOCATION=/local-storage
     volumes:
       - $HOME/chores-storage:/local-storage
+    ports:
+      - 8080:8080
     restart: always
 
   prometheus:
     image: prom/prometheus
-    restart: always
-    ports:
-      - 9090:9090
     command:
       - '--config.file=/home/prometheus.yml'
       - '--web.external-url=http://localhost:9090/prometheus/'
@@ -41,13 +42,18 @@ services:
     volumes:
       - ./prometheus.yml:/home/prometheus.yml
       - $HOME/prometheus-storage:/prometheus
+    ports:
+      - 9090:9090
+    restart: always
 
   prometheus-node-exporter:
     image: prom/node-exporter
-    restart: always
     command:
       - '--path.rootfs=/host'
     network_mode: host
     pid: host
     volumes:
       - '/:/host:ro,rslave'
+    ports:
+      - 9100:9100
+    restart: always

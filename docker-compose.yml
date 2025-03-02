@@ -1,28 +1,21 @@
 services:
-  nginx:
-    image: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+  prometheus:
+    image: prom/prometheus
+    restart: always
     ports:
-      - "80:80"
-    restart: always
-
-  vaillant-poller:
-    image: timsummertonbrier/vaillant-poller
-    env_file: $HOME/vaillant-poller-secrets.env
-    environment:
-      - VAILLANT_POLL_DELAY_SECONDS=60
-      - VAILLANT_LOCAL_STORAGE_PATH=/local-storage
+      - 9090:9090
+    command:
+      - '--config.file=/home/prometheus.yml'
+      - '--web.external-url=http://localhost:9090/prometheus/'
     volumes:
-      - $HOME/vaillant-poller-storage:/local-storage
-    restart: always
+      - ./prometheus.yml:/home/prometheus.yml
 
-  chores:
-    image: timsummertonbrier/chores
-    env_file: $HOME/chores-secrets.env
-    environment:
-      - MICRONAUT_ENVIRONMENTS=raspberrypi
-      - APP_LOG_FILE_LOCATION=/local-storage
-    volumes:
-      - $HOME/chores-storage:/local-storage
+  prometheus-node-exporter:
+    image: prom/node-exporter
     restart: always
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'

@@ -27,3 +27,26 @@ services:
     volumes:
       - $HOME/chores-storage:/local-storage
     restart: always
+
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    command:
+      - '--config.file=/home/prometheus.yml'
+      - '--web.external-url=http://localhost:9090/prometheus/'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./prometheus.yml:/home/prometheus.yml
+
+  prometheus-node-exporter:
+    image: prom/node-exporter
+    restart: always
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'

@@ -7,6 +7,8 @@ services:
     command:
       - '--config.file=/home/prometheus.yml'
       - '--web.external-url=http://localhost:9090/prometheus/'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./prometheus.yml:/home/prometheus.yml
 

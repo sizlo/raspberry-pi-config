@@ -13,6 +13,8 @@ services:
     environment:
       - VAILLANT_POLL_DELAY_SECONDS=60
       - VAILLANT_LOCAL_STORAGE_PATH=/local-storage
+      - VAILLANT_NUM_DAILY_SYSTEM_DUMPS_TO_KEEP=100
+      - VAILLANT_CONSUMPTION_LOOKBACK_DAYS=30
     volumes:
       - $HOME/vaillant-poller-storage:/local-storage
     ports:

@@ -11,7 +11,7 @@ services:
     image: timsummertonbrier/vaillant-poller
     env_file: $HOME/vaillant-poller-secrets.env
     environment:
-      - VAILLANT_POLL_DELAY_SECONDS=60
+      - VAILLANT_POLL_DELAY_SECONDS=300
       - VAILLANT_LOCAL_STORAGE_PATH=/local-storage
       - VAILLANT_NUM_DAILY_SYSTEM_DUMPS_TO_KEEP=100
       - VAILLANT_CONSUMPTION_LOOKBACK_DAYS=30

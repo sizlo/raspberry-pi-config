@@ -27,7 +27,8 @@ services:
     environment:
       - MICRONAUT_SERVER_CONTEXT_PATH=/chores
       - MICRONAUT_ENVIRONMENTS=raspberrypi
-      - APP_LOG_FILE_LOCATION=/local-storage
+      - APP_LOG_FILE_LOCATION=/local-storage/logs
+      - STATIC_RESOURCE_PATH=/local-storage/static-resources
     volumes:
       - $HOME/chores-storage:/local-storage
     ports:
